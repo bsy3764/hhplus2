@@ -55,7 +55,8 @@ public class ReservationIntegrationTest {
     @Test
     @DisplayName("신청한 강의는 예약내역을 저쟝해야 함")
     void saveReservation() {
-        repository.save(new Reservation(null, "tester3", 1L, LocalDateTime.now(), ReservationStatus.SUCCESS));
+//        repository.save(new Reservation(null, "tester3", 1L, LocalDateTime.now(), ReservationStatus.SUCCESS));
+        repository.registReservation(1L, "tester3");
 
         long id = 1L;
         Optional<Reservation> result = service.findById(id);

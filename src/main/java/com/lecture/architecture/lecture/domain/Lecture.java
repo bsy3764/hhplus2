@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
 
 import java.time.LocalDateTime;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Getter
 @Setter
@@ -35,7 +36,7 @@ public class Lecture {
 
     @Column(nullable = false)
     @Max(30)
-    private int studentCount;
+    private AtomicInteger studentCount;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)    // 열거타입 이름을 값으로 저장
@@ -45,7 +46,7 @@ public class Lecture {
     }
 
     @Builder
-    public Lecture(Long id, String title, String instructor, LocalDateTime dateTime, int price, int studentCount, LectureStatus status) {
+    public Lecture(Long id, String title, String instructor, LocalDateTime dateTime, int price, AtomicInteger studentCount, LectureStatus status) {
         this.id = id;
         this.title = title;
         this.instructor = instructor;

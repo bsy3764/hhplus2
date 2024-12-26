@@ -2,6 +2,7 @@ package com.lecture.architecture.lecture.domain;
 
 import com.lecture.architecture.lecture.infra.LectureRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -9,6 +10,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class LectureServiceImpl implements LectureService{
@@ -81,5 +83,36 @@ public class LectureServiceImpl implements LectureService{
     @Override
     public List<Lecture> findByStatus(LectureStatus lectureStatus) {
         return repository.findByStatus(lectureStatus);
+    }
+
+    @Override
+    public boolean addStudentCount(long id) {
+        Optional<Lecture> optionalLecture = repository.findByID(id);
+        Lecture lecture = null;
+        if (optionalLecture.isPresent()) {
+            lecture = optionalLecture.get();
+            int studentCount = getValue(lecture);
+            log.info("before student count: {}", studentCount);
+            if (studentCount < 30) {
+                boolean result = increment(lecture);
+                if (result) {
+                    log.info("after student count: {}", lecture.getStudentCount());
+                } else {
+                    throw new RuntimeException("다시 시도해주세요.");
+                }
+            } else {
+                return false;            }
+        }
+        return true;
+    }
+
+    private int getValue(Lecture lecture) {
+        return lecture.getStudentCount().get();
+    }
+
+    private boolean increment(Lecture lecture) {
+        int existingValue = getValue(lecture);
+        int newValue = existingValue + 1;
+        return lecture.getStudentCount().compareAndSet(existingValue, newValue);
     }
 }

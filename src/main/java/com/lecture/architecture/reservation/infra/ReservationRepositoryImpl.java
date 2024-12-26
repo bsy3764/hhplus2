@@ -50,7 +50,13 @@ public class ReservationRepositoryImpl implements ReservationRepository {
         return repository.findByDateTimeAndStatus(dateTime, reservationStatus);
     }
 
-    public void save(Reservation reservation){
+    @Override
+    public void registReservation(long lectureId, String studentId){
+        Reservation reservation = new Reservation(null, studentId, lectureId, LocalDateTime.now(), ReservationStatus.SUCCESS);
+        repository.save(reservation);
+    }
+
+    public void save(Reservation reservation) {
         repository.save(reservation);
     }
 

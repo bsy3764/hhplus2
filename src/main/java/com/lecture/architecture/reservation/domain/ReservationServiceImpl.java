@@ -1,5 +1,8 @@
 package com.lecture.architecture.reservation.domain;
 
+import com.lecture.architecture.lecture.infra.LectureRepository;
+import com.lecture.architecture.reservation.infra.ReservationRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -7,10 +10,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ReservationServiceImpl implements ReservationService{
+
+    private final ReservationRepository repository;
+
     @Override
     public Optional<Reservation> findById(long id) {
-        return Optional.empty();
+        return repository.findById(id);
     }
 
     @Override
@@ -46,5 +53,10 @@ public class ReservationServiceImpl implements ReservationService{
     @Override
     public List<Reservation> findByDateNStatus(LocalDateTime dateTime, ReservationStatus reservationStatus) {
         return List.of();
+    }
+
+    @Override
+    public void registReservation(long lectureId, String studentId) {
+        repository.registReservation(lectureId, studentId);
     }
 }

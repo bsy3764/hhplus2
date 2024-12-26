@@ -61,4 +61,6 @@ public interface LectureService {
      * @return
      */
     List<Lecture> findByStatus(LectureStatus lectureStatus);
+
+    boolean addStudentCount(long id);
 }

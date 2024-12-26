@@ -21,4 +21,6 @@ public interface ReservationRepository {
     List<Reservation> findByStudentIdNStatus(String studentId, ReservationStatus reservationStatus);
 
     List<Reservation> findByDateNStatus(LocalDateTime dateTime, ReservationStatus reservationStatus);
+
+    void registReservation(long lectureId, String studentId);
 }

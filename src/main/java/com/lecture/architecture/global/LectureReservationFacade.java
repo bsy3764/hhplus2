@@ -21,6 +21,7 @@ public class LectureReservationFacade {
     private final LectureService lectureService;
     private final ReservationService reservationService;
 
+    // 신청할 수 있는 강의 목록 출력
     public List<LectureDto> searchLectures() {
         List<Lecture> lectureServiceByDateTime = lectureService.findByDateTime(LocalDateTime.now());
 
@@ -60,6 +61,31 @@ public class LectureReservationFacade {
         return dtoList;
     }
 
+    // 강의 신청
+    public ReservationDto requestReservation(long lectureId, String studentId) {
+        Optional<Reservation> reservationCheck = reservationService.findByLectureId(lectureId);
+        if (reservationCheck.isPresent()) {
+            throw new RuntimeException("이미 신청한 강의 입니다.");
+        }
+
+        boolean addedStudentCount = lectureService.addStudentCount(lectureId);
+
+        if (addedStudentCount) {
+            reservationService.registReservation(lectureId, studentId);
+
+            Optional<Reservation> reservationOptional = reservationService.findByLectureId(lectureId);
+            if (reservationOptional.isPresent()) {
+                Reservation reservation = reservationOptional.get();
+                return reservationEntityToDto(reservation);
+            } else {
+                throw new RuntimeException("신청에 에러가 발생했습니다");
+            }
+        } else {
+            throw new RuntimeException("이미 정원이 가득차 신청이 불가능합니다.");
+        }
+    }
+
+    // 학생 ID로 예약한 내역 확인
     public List<ReservationDto> getReservationByStudentId(String studentId) {
         List<Reservation> reservationList = reservationService.findByStudentId(studentId);
         List<ReservationDto> reservationDtoList = new ArrayList<>();
@@ -68,7 +94,6 @@ public class LectureReservationFacade {
         }
         return reservationDtoList;
     }
-
 
     private LectureDto lectureEntityToDto(Lecture lecture){
         LectureDto lectureDto = new LectureDto();

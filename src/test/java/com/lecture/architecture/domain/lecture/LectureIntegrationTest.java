@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -41,7 +42,7 @@ public class LectureIntegrationTest {
                 .instructor("홍길동")
                 .dateTime(time)
                 .price(1000)
-                .studentCount(20)
+                .studentCount(new AtomicInteger(0))
                 .status(LectureStatus.OPEN)
                 .build();
     }
@@ -49,9 +50,9 @@ public class LectureIntegrationTest {
     @BeforeEach
     void initDataInsert() {
         repository.save(new Lecture(null, "Introduction to Java", "John Doe",
-                LocalDateTime.of(2024, 12, 27, 10, 0), 20000, 20, LectureStatus.OPEN));
+                LocalDateTime.of(2024, 12, 27, 10, 0), 20000, new AtomicInteger(20), LectureStatus.OPEN));
         repository.save(new Lecture(null, "Spring Boot Basics", "Jane Smith",
-                LocalDateTime.of(2024, 12, 28, 14, 0), 15000, 10, LectureStatus.OPEN));
+                LocalDateTime.of(2024, 12, 28, 14, 0), 15000, new AtomicInteger(10), LectureStatus.OPEN));
     }
 
     @AfterEach
@@ -184,5 +185,13 @@ public class LectureIntegrationTest {
 
         // then
         List<Lecture> answer = repository.findByStatus(LectureStatus.OPEN);
+    }
+
+    @Test
+    @DisplayName("강의를 신청하면 학생수가 증가함")
+    void addStudentCount() {
+        long id = 1L;
+        boolean result = service.addStudentCount(id);
+        assertThat(result).isTrue();
     }
 }
