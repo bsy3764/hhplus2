@@ -1,8 +1,9 @@
 package com.lecture.architecture.domain.reservation;
 
-import com.lecture.architecture.domain.reservation.Reservation;
-import com.lecture.architecture.domain.reservation.ReservationService;
-import com.lecture.architecture.domain.reservation.ReservationStatus;
+import com.lecture.architecture.reservation.domain.Reservation;
+import com.lecture.architecture.reservation.infra.ReservationRepository;
+import com.lecture.architecture.reservation.domain.ReservationService;
+import com.lecture.architecture.reservation.domain.ReservationStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

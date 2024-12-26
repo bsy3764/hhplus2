@@ -1,4 +1,7 @@
-package com.lecture.architecture.domain.lecture;
+package com.lecture.architecture.lecture.infra;
+
+import com.lecture.architecture.lecture.domain.Lecture;
+import com.lecture.architecture.lecture.domain.LectureStatus;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,4 +22,6 @@ public interface LectureRepository {
     List<Lecture> findByStudentCount(int studentCount);
 
     List<Lecture> findByStatus(LectureStatus lectureStatus);
+
+    void save(Lecture lecture);
 }

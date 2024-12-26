@@ -1,5 +1,7 @@
-package com.lecture.architecture.domain.lecture;
+package com.lecture.architecture.lecture.infra;
 
+import com.lecture.architecture.lecture.domain.Lecture;
+import com.lecture.architecture.lecture.domain.LectureStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -46,5 +48,10 @@ public class LectureRepositoryImpl implements LectureRepository {
     @Override
     public List<Lecture> findByStatus(LectureStatus lectureStatus) {
         return repository.findByStatus(lectureStatus);
+    }
+
+    @Override
+    public void save(Lecture lecture){
+        repository.save(lecture);
     }
 }

@@ -1,4 +1,4 @@
-package com.lecture.architecture.domain.reservation;
+package com.lecture.architecture.reservation.domain;
 
 public enum ReservationStatus {
     SUCCESS, FAIL

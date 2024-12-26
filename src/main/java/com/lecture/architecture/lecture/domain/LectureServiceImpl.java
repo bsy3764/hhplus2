@@ -1,10 +1,10 @@
-package com.lecture.architecture.domain.lecture;
+package com.lecture.architecture.lecture.domain;
 
+import com.lecture.architecture.lecture.infra.LectureRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;

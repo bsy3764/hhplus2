@@ -1,4 +1,4 @@
-package com.lecture.architecture.domain.reservation;
+package com.lecture.architecture.reservation.domain;
 
 import java.time.LocalDateTime;
 import java.util.List;

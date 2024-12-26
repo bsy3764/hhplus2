@@ -1,4 +1,4 @@
-package com.lecture.architecture.domain.reservation;
+package com.lecture.architecture.reservation.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -12,7 +12,7 @@ public class Reservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 기본 키 생성을 데이터베이스에 위임하는 전략
-    private long id;
+    private Long id;
 
     @Column(length = 50, nullable = false)
     @NotNull

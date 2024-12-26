@@ -1,19 +1,20 @@
-package com.lecture.architecture.domain.lecture;
+package com.lecture.architecture.lecture.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Range;
 
 import java.time.LocalDateTime;
 
+@EqualsAndHashCode
 @Entity
 public class Lecture {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 기본 키 생성을 데이터베이스에 위임하는 전략
-    private long id;
+    private Long id;
 
     @Column(length = 500, nullable = false)
     private String title;

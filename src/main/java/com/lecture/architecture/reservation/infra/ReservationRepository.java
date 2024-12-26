@@ -1,4 +1,7 @@
-package com.lecture.architecture.domain.reservation;
+package com.lecture.architecture.reservation.infra;
+
+import com.lecture.architecture.reservation.domain.Reservation;
+import com.lecture.architecture.reservation.domain.ReservationStatus;
 
 import java.time.LocalDateTime;
 import java.util.List;

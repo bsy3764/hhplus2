@@ -1,5 +1,7 @@
-package com.lecture.architecture.domain.lecture;
+package com.lecture.architecture.lecture.infra;
 
+import com.lecture.architecture.lecture.domain.Lecture;
+import com.lecture.architecture.lecture.domain.LectureStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;

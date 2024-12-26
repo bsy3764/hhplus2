@@ -1,5 +1,7 @@
-package com.lecture.architecture.domain.lecture;
+package com.lecture.architecture.lecture.api;
 
+import com.lecture.architecture.lecture.domain.Lecture;
+import com.lecture.architecture.lecture.domain.LectureService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +34,16 @@ public class LectureController {
             return optionalLecture.get();
         } else {
             throw new IllegalArgumentException("해당 강의ID의 강의는 찾을수 없습니다.");
+        }
+    }
+
+    @GetMapping("/{studentCount}")
+    public List<Lecture> searchLecture(@PathVariable int studentCount) {
+        List<Lecture> lectures = service.findByStudentCount(studentCount);
+        if (!lectures.isEmpty()) {
+            return lectures;
+        } else {
+            throw new IllegalArgumentException("학생 수 이하의 강의는 찾을수 없습니다.");
         }
     }
 }

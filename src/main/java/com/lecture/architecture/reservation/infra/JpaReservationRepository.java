@@ -1,6 +1,7 @@
-package com.lecture.architecture.domain.reservation;
+package com.lecture.architecture.reservation.infra;
 
-import com.lecture.architecture.domain.lecture.Lecture;
+import com.lecture.architecture.reservation.domain.Reservation;
+import com.lecture.architecture.reservation.domain.ReservationStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;

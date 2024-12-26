@@ -1,9 +1,9 @@
 package com.lecture.architecture.domain.lecture;
 
-import com.lecture.architecture.domain.lecture.Lecture;
-import com.lecture.architecture.domain.lecture.LectureRepository;
-import com.lecture.architecture.domain.lecture.LectureService;
-import com.lecture.architecture.domain.lecture.LectureStatus;
+import com.lecture.architecture.lecture.domain.Lecture;
+import com.lecture.architecture.lecture.domain.LectureService;
+import com.lecture.architecture.lecture.domain.LectureStatus;
+import com.lecture.architecture.lecture.infra.LectureRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-//@Transactional
+@Transactional
 @SpringBootTest
 public class LectureIntegrationTest {
 
@@ -43,12 +43,22 @@ public class LectureIntegrationTest {
                 .build();
     }
 
+//    @BeforeEach
+//    void initDataInsert() {
+//        repository.save(new Lecture(1L, "Introduction to Java", "John Doe",
+//                LocalDateTime.of(2024, 12, 27, 10, 0), 200, 20, LectureStatus.OPEN));
+//        repository.save(new Lecture(2L, "Spring Boot Basics", "Jane Smith",
+//                LocalDateTime.of(2024, 12, 28, 14, 0), 150, 10, LectureStatus.OPEN));
+//    }
+
     @Test
+//    @Transactional
     @DisplayName("강의 ID로 검색하여 강의 가져오기")
     void getLectureByID() {
         // given
         long id = 1L;
         Lecture lecture = createLectureBuilder();
+//        repository.save(lecture);
 
         // when
         Optional<Lecture> optionalResult = service.findById(id);
@@ -116,7 +126,7 @@ public class LectureIntegrationTest {
         Lecture lecture = createLectureBuilder();
 
         // when
-        List<Lecture> results = service.findByDateTime(to);
+        List<Lecture> results = service.findByDateTime(time);
 
         // then
         List<Lecture> answer = repository.findByDateTime(time, to);

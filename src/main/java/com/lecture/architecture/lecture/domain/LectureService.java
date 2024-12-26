@@ -1,4 +1,4 @@
-package com.lecture.architecture.domain.lecture;
+package com.lecture.architecture.lecture.domain;
 
 import java.time.LocalDateTime;
 import java.util.List;

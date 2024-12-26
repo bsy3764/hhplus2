@@ -1,50 +1,50 @@
-package com.lecture.architecture.domain.reservation;
+package com.lecture.architecture.reservation.domain;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-@RequiredArgsConstructor
-public class ReservationRepositoryImpl implements ReservationRepository {
-
-    private final JpaReservationRepository repository;
-
+@Service
+public class ReservationServiceImpl implements ReservationService{
     @Override
     public Optional<Reservation> findById(long id) {
-        return repository.findById(id);
+        return Optional.empty();
     }
 
     @Override
     public List<Reservation> findByStudentId(String studentId) {
-        return repository.findByStudentId(studentId);
+        return List.of();
     }
 
     @Override
     public Optional<Reservation> findByLectureId(long lectureId) {
-        return repository.findByLectureId(lectureId);
+        return Optional.empty();
     }
 
     @Override
     public List<Reservation> findByDate(LocalDateTime from, LocalDateTime to) {
-        return repository.findByDateTimeBetween(from, to);
+        return List.of();
+    }
+
+    @Override
+    public List<Reservation> findByDate(LocalDateTime dateTime) {
+        return List.of();
     }
 
     @Override
     public List<Reservation> findByStatus(ReservationStatus reservationStatus) {
-        return repository.findByStatus(reservationStatus);
+        return List.of();
     }
 
     @Override
     public List<Reservation> findByStudentIdNStatus(String studentId, ReservationStatus reservationStatus) {
-        return repository.findByStudentIdAndStatus(studentId, reservationStatus);
+        return List.of();
     }
 
     @Override
     public List<Reservation> findByDateNStatus(LocalDateTime dateTime, ReservationStatus reservationStatus) {
-        return repository.findByDateTimeAndStatus(dateTime, reservationStatus);
+        return List.of();
     }
 }
