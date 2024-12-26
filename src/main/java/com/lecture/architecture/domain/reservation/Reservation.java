@@ -23,18 +23,18 @@ public class Reservation {
 
     @Column(nullable = false)
     @CreatedDate    // 생성일 자동 저장
-    private LocalDateTime date;
+    private LocalDateTime dateTime;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private ReservationStatus status;
 
     @Builder
-    public Reservation(long id, String studentId, long lectureId, LocalDateTime date, ReservationStatus status) {
+    public Reservation(long id, String studentId, long lectureId, LocalDateTime dateTime, ReservationStatus status) {
         this.id = id;
         this.studentId = studentId;
         this.lectureId = lectureId;
-        this.date = date;
+        this.dateTime = dateTime;
         this.status = status;
     }
 }
