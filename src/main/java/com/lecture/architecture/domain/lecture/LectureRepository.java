@@ -14,8 +14,6 @@ public interface LectureRepository {
 
     List<Lecture> findByDateTime(LocalDateTime from, LocalDateTime to);
 
-    List<Lecture> findByDateTime(LocalDateTime to);
-
     List<Lecture> findByPrice(int price);
 
     List<Lecture> findByStudentCount(int studentCount);

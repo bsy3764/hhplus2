@@ -4,8 +4,11 @@ import com.lecture.architecture.domain.lecture.Lecture;
 import com.lecture.architecture.domain.lecture.LectureRepository;
 import com.lecture.architecture.domain.lecture.LectureService;
 import com.lecture.architecture.domain.lecture.LectureStatus;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -13,9 +16,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+//@Transactional
 @SpringBootTest
 public class LectureIntegrationTest {
 
+    private final Logger log = LoggerFactory.getLogger(this.getClass().getSimpleName());
 //    Lecture lecture;
 
     @Autowired
@@ -24,16 +29,16 @@ public class LectureIntegrationTest {
     @Autowired
     LectureRepository repository;
 
-    LocalDateTime time = LocalDateTime.now();
+    LocalDateTime time = LocalDateTime.now().minusDays(1);
 
     private Lecture createLectureBuilder() {
         return Lecture.builder()
                 .id(1L)
-                .title("tt")
-                .instructor("aa")
+                .title("주식 왕초보")
+                .instructor("홍길동")
                 .dateTime(time)
                 .price(1000)
-                .studentCount(30)
+                .studentCount(20)
                 .status(LectureStatus.OPEN)
                 .build();
     }
@@ -46,10 +51,18 @@ public class LectureIntegrationTest {
         Lecture lecture = createLectureBuilder();
 
         // when
-        Optional<Lecture> result = service.findById(id);
+        Optional<Lecture> optionalResult = service.findById(id);
+        log.info("optionalLecture isPresent: {}", optionalResult.isPresent());
+        if (optionalResult.isPresent()) {
+            Lecture result = optionalResult.get();
+            log.info("result: {}", result);
+        }
 
         // then
-        Optional<Lecture> answer = repository.findByID(id);
+        Optional<Lecture> optionalAnswer = repository.findByID(id);
+        if (optionalAnswer.isPresent()) {
+            Lecture answer = optionalAnswer.get();
+        }
     }
 
     @Test
@@ -99,14 +112,14 @@ public class LectureIntegrationTest {
     @DisplayName("강의날짜로 강의 목록 가져오기")
     void getLectureByDate() {
         // given
-        LocalDateTime to = time.plusDays(3L);
+        LocalDateTime to = time.plusMonths(6L);
         Lecture lecture = createLectureBuilder();
 
         // when
         List<Lecture> results = service.findByDateTime(to);
 
         // then
-        List<Lecture> answer = repository.findByDateTime(to);
+        List<Lecture> answer = repository.findByDateTime(time, to);
     }
 
     @Test

@@ -1,28 +1,40 @@
 package com.lecture.architecture.domain.reservation;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
-import lombok.RequiredArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+
+import java.time.LocalDateTime;
 
 @Entity
-//@RequiredArgsConstructor
 public class Reservation {
+
     @Id
-    private final long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // 기본 키 생성을 데이터베이스에 위임하는 전략
+    private long id;
 
+    @Column(length = 50, nullable = false)
     @NotNull
-    private final String studentId;
+    private String studentId;
 
-    private final long lectureId;
-    private final ReservationStatus status;
+    @Column(nullable = false)
+    private long lectureId;
+
+    @Column(nullable = false)
+    @CreatedDate    // 생성일 자동 저장
+    private LocalDateTime date;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private ReservationStatus status;
 
     @Builder
-    public Reservation(long id, String studentId, long lectureId, ReservationStatus status) {
+    public Reservation(long id, String studentId, long lectureId, LocalDateTime date, ReservationStatus status) {
         this.id = id;
         this.studentId = studentId;
         this.lectureId = lectureId;
+        this.date = date;
         this.status = status;
     }
 }

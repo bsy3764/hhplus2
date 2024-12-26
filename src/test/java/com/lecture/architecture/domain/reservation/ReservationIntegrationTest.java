@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,21 +69,37 @@ public class ReservationIntegrationTest {
         Optional<Reservation> result = service.findByLectureId(lectureId);
 
         // then
-        List<Reservation> answer = repository.findByLectureId(lectureId);
+        Optional<Reservation> answer = repository.findByLectureId(lectureId);
     }
 
     @Test
-    @DisplayName("강사로 예약 목록을 확인")
-    void findByInstructor() {
+    @DisplayName("예약일로 예약 목록을 확인")
+    void findByDateRange() {
         // given
-        String instructor = "";
+        LocalDateTime from = LocalDateTime.now();
+        LocalDateTime to = LocalDateTime.now();
         Reservation reservation = createReservation();
 
         // when
-        List<Reservation> result = service.findByInstructor(instructor);
+        List<Reservation> result = service.findByDate(from, to);
 
         // then
-        List<Reservation> answer = repository.findByInstructor(instructor);
+        List<Reservation> answer = repository.findByDate(from, to);
+    }
+
+    @Test
+    @DisplayName("예약일로 예약 목록을 확인")
+    void findByDate() {
+        // given
+        LocalDateTime dateTime = LocalDateTime.now();
+        LocalDateTime after = dateTime.plusDays(7);
+        Reservation reservation = createReservation();
+
+        // when
+        List<Reservation> result = service.findByDate(dateTime);
+
+        // then
+        List<Reservation> answer = repository.findByDate(dateTime, after);
     }
 
     @Test
@@ -113,17 +130,17 @@ public class ReservationIntegrationTest {
     }
 
     @Test
-    @DisplayName("강사명 + 예약 상태로 예약 목록을 확인")
-    void findByLectureIdNStatus() {
+    @DisplayName("예약일 + 예약 상태로 예약 목록을 확인")
+    void findByDateNStatus() {
         // given
-        String instructor = "";
+        LocalDateTime dateTime = LocalDateTime.now();
         Reservation reservation = createReservation();
 
         // when
-        List<Reservation> result = service.findByInstructorNStatus(instructor, ReservationStatus.SUCCESS);
+        List<Reservation> result = service.findByDateNStatus(dateTime, ReservationStatus.SUCCESS);
 
         // then
-        List<Reservation> answer = repository.findByInstructorNStatus(instructor, ReservationStatus.SUCCESS);
+        List<Reservation> answer = repository.findByDateNStatus(dateTime, ReservationStatus.SUCCESS);
     }
 
 }

@@ -1,0 +1,23 @@
+package com.lecture.architecture.domain.reservation;
+
+import com.lecture.architecture.domain.lecture.Lecture;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+
+public interface JpaReservationRepository extends JpaRepository<Reservation, Long> {
+//
+//    List<Reservation> findByStudentId(String studentId);
+//
+//    Optional<Reservation> findByLectureId(long lectureId);
+//
+//    List<Reservation> findByDateTimeBetween(LocalDateTime from, LocalDateTime to);
+//
+//    List<Reservation> findByStatus(ReservationStatus reservationStatus);
+//
+//    List<Reservation> findByStudentIdAndStatus(String studentId, ReservationStatus reservationStatus);
+//
+//    List<Reservation> findByDateAndStatus(LocalDateTime dateTime, ReservationStatus reservationStatus);
+}
