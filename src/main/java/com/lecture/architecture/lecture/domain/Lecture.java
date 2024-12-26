@@ -4,10 +4,14 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
 
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
 @EqualsAndHashCode
 @Entity
 public class Lecture {
@@ -37,8 +41,11 @@ public class Lecture {
     @Enumerated(EnumType.STRING)    // 열거타입 이름을 값으로 저장
     private LectureStatus status;
 
+    public Lecture() {
+    }
+
     @Builder
-    public Lecture(long id, String title, String instructor, LocalDateTime dateTime, int price, int studentCount, LectureStatus status) {
+    public Lecture(Long id, String title, String instructor, LocalDateTime dateTime, int price, int studentCount, LectureStatus status) {
         this.id = id;
         this.title = title;
         this.instructor = instructor;

@@ -49,4 +49,12 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     public List<Reservation> findByDateNStatus(LocalDateTime dateTime, ReservationStatus reservationStatus) {
         return repository.findByDateTimeAndStatus(dateTime, reservationStatus);
     }
+
+    public void save(Reservation reservation){
+        repository.save(reservation);
+    }
+
+    public void deleteAll() {
+        repository.deleteAll();
+    }
 }

@@ -50,8 +50,11 @@ public class LectureRepositoryImpl implements LectureRepository {
         return repository.findByStatus(lectureStatus);
     }
 
-    @Override
     public void save(Lecture lecture){
         repository.save(lecture);
+    }
+
+    public void deleteAll() {
+        repository.deleteAll();
     }
 }

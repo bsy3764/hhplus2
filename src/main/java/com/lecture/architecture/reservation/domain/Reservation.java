@@ -3,10 +3,14 @@ package com.lecture.architecture.reservation.domain;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
 @Entity
 public class Reservation {
 
@@ -29,8 +33,11 @@ public class Reservation {
     @Enumerated(EnumType.STRING)
     private ReservationStatus status;
 
+    public Reservation() {
+    }
+
     @Builder
-    public Reservation(long id, String studentId, long lectureId, LocalDateTime dateTime, ReservationStatus status) {
+    public Reservation(Long id, String studentId, long lectureId, LocalDateTime dateTime, ReservationStatus status) {
         this.id = id;
         this.studentId = studentId;
         this.lectureId = lectureId;

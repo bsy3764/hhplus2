@@ -23,5 +23,4 @@ public interface LectureRepository {
 
     List<Lecture> findByStatus(LectureStatus lectureStatus);
 
-    void save(Lecture lecture);
 }
