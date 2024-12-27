@@ -84,3 +84,5 @@
 - api 호출 및 서비스 로직
   - 54525b851c743ffe300a260db6ab42b99a9fe95e
   - 646ed2025a5beec92c53ed8acf07a28e24535a13
+- PR은 계속 모르겠음...
+  - 초기에 init, pull, push 후, branch 만들어서 checkout 하여 그곳에서 코드작성 및 commit을 했는데 pr에서 나오는건 파일 1개뿐인지..
